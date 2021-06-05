@@ -1,29 +1,12 @@
-<nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a class="navbar-item" href="https://bulma.io">
-      <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
-    </a>
-
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-
-  <div id="navbarBasicExample" class="navbar-menu">
-
-    <div class="navbar-end">
-      <div class="navbar-item">
-        <div class="buttons">
-          <a class="button is-primary">
-            <strong>Sign up</strong>
-          </a>
-          <a class="button is-light">
-            Log in
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</nav>
+<div class="sidebar">
+  <h2><img src="./assets/image/favicon.png"> VenueHut</h2>
+  <ul>
+    <li><a href="#"><i class="fas fa-home"></i>Home</a></li>
+    <li><a href="#"><i class="fas fa-user"></i>Profile</a></li>
+    <li><a href="#"><i class="fas fa-address-card"></i>About</a></li>
+    <li><a href="#"><i class="fas fa-project-diagram"></i>portfolio</a></li>
+    <li><a href="#"><i class="fas fa-blog"></i>Blogs</a></li>
+    <li><a href="#"><i class="fas fa-address-book"></i>Contact</a></li>
+    <li><a href="#"><i class="fas fa-map-pin"></i>Map</a></li>
+  </ul>
+</div>
