@@ -1,3 +1,42 @@
+<?php
+
+include('conn.php');
+
+if (isset($_POST['register'])) {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $address = $_POST['Address'];
+
+    $password = password_hash($password, PASSWORD_DEFAULT);
+
+    $sq = "INSERT INTO `admin_users` (`user_name`, `Password`, `Address`) VALUES ('$username', '$password', '$address')";
+    if(mysqli_query($conn, $sq))
+    {
+        ?>
+
+        <article class="message is-success">
+            <div class="message-header">
+                <p>Successfully Register <a href="./login.php"> Login Here </a></p>
+                <button class="delete" aria-label="delete"></button>
+            </div>
+        </article>
+
+        <?php
+    }
+    else{
+    ?>
+    <article class="message is-danger">
+            <div class="message-header">
+                <p>Error occurred Try again</p>
+                <button class="delete" aria-label="delete"></button>
+            </div>
+        </article>
+    <?php
+    }
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,6 +45,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VenueHut</title>
+    <link rel="shortcut icon" type="image/jpg" href="./assets/image/favicon.png"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 </head>
@@ -16,7 +56,7 @@
             <div class="content">
                 <div class="content has-text-centered">
                     <figure class="image is-64x64" style="margin: auto auto;">
-                        <img src="./assets/img/avatars/logo.png" alt="...">
+                        <img src="./assets/image/favicon.png" alt="...">
                     </figure>
                     <p class="title" style="margin: 5px;">Register</p>
                     <p>Your self at VenueHut</p>
@@ -38,9 +78,17 @@
                             </span>
                         </p>
                     </div>
+                    <div class="field">
+                        <p class="control has-icons-left">
+                            <input class="input is-rounded" type="Address"  name="Address" placeholder="Address" required>
+                            <span class="icon is-small is-left">
+                                <i class="fa fa-map-marked-alt"></i>
+                            </span>
+                        </p>
+                    </div>
                     <div class="field has-text-centered">
                         <p class="control">
-                        <button type="submit" class="button is-rounded is-fullwidth is-6 has-text-white is-primary" name="login">
+                        <button type="submit" class="button is-rounded is-fullwidth is-6 has-text-white is-primary" name="register">
                                 Register
                             </button>
 
@@ -56,5 +104,6 @@
     </div>
 
 </body>
+<script src="./assets/js/message.js"></script>
 
 </html>

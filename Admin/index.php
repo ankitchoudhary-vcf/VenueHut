@@ -1,3 +1,15 @@
+<?php
+
+include('conn.php');
+
+session_start();
+
+if (!(isset($_SESSION['user_id']))) {
+    header('Location: ./login.php');
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +18,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>venueHut</title>
-    <link rel="shortcut icon" type="image/jpg" href="./assets/image/favicon.png"/>
+    <link rel="shortcut icon" type="image/jpg" href="./assets/image/favicon.png" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
@@ -24,8 +36,28 @@
         <!-- main section -->
         <div class="main_content">
 
+            <?php
+
+            if (isset($_SESSION['success'])) {
+            ?>
+
+                <article class="message is-success">
+                    <div class="message-header">
+                        <p>Successfully Login</p>
+                        <button class="delete" aria-label="delete"></button>
+                    </div>
+                </article>
+
+            <?php
+                unset($_SESSION['success']);
+            }
+
+            ?>
+
+
+
             <div class=" container mx-4 mt-4">
-            <a class="button" href="#" style="float:right"><i class="fa fa-plus mr-2" style="color:#00d1b2;"></i> Add New Services</a>
+                <a class="button" href="#" style="float:right"><i class="fa fa-plus mr-2" style="color:#00d1b2;"></i> Add New Services</a>
                 <div class="title">
                     <nav class="breadcrumb" aria-label="breadcrumbs">
                         <ul>
@@ -76,5 +108,6 @@
     </div>
 </body>
 <script src="./assets/js/script.js"></script>
+<script src="./assets/js/message.js"></script>
 
 </html>
