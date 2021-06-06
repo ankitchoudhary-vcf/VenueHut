@@ -4,7 +4,7 @@
   <div id="navbar">
     <ul>
       <li><a href="./"><i class="fas fa-home"></i>Dashboard</a></li>
-      <li><a href="#"><i class="fas fa-plus"></i>Add New Services</a></li>
+      <li><a class="modal-button" data-target="addServices"><i class="fas fa-plus"></i>Add New Services</a></li>
       <li><a href="#"><i class="fas fa-user"></i>Profile</a></li>
       <li><a href="./logout.php"><i class="fas fa-sign-out"></i>Logout</a></li>
     </ul>
