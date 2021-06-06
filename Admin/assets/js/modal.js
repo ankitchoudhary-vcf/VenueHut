@@ -18,6 +18,11 @@ for (let i = 0; i < btn.length; i++) {
         btn[i].addEventListener("click", (e) => {
             modal = document.getElementById(btn[i].dataset.target);
             modal.classList.toggle("is-active")
+            if(btn[i].dataset.id)
+            {
+               let venue = modal.getElementsByClassName('VenueId');
+               venue[0].value = btn[i].dataset.id;
+            }
         })
 
         // toggler the class is-active class in modal to close the modal
