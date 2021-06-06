@@ -178,7 +178,7 @@ if (isset($_POST['addVenue'])) {
                     <nav class="breadcrumb" aria-label="breadcrumbs">
                         <ul>
                             <li><a href="./">VenueHut</a></li>
-                            <li class="is-active"><a aria-current="page" href="./">Dashboard</a></li>
+                            <li class="is-active"><a aria-current="page">Dashboard</a></li>
                         </ul>
                     </nav>
                 </div>
