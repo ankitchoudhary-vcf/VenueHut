@@ -100,6 +100,14 @@ body{
   line-height: 25px;
 }
 
+#sidebarToggle{
+  display: none;
+}
+
+.rotate{
+  transform: rotate(180deg)!important;
+}
+
 .wrapper .main_content .info div{
   margin-bottom: 20px;
 }
@@ -107,5 +115,20 @@ body{
 @media (max-height: 500px){
   .social_media{
     display: none !important;
+  }
+}
+@media (max-width:500px){
+  .wrapper .sidebar{
+    width:100px;
+  }
+  .wrapper .sidebar #navbar{
+    display: none;
+  }
+  .wrapper .main_content{
+    margin-left: 100px;
+  }
+  #sidebarToggle{
+    transform: translate(-50%, 100%);
+    display: block;
   }
 }

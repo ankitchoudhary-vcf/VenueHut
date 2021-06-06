@@ -1,12 +1,13 @@
 <div class="sidebar">
   <h2><img src="./assets/image/favicon.png"> VenueHut</h2>
-  <ul>
-    <li><a href="#"><i class="fas fa-home"></i>Home</a></li>
-    <li><a href="#"><i class="fas fa-user"></i>Profile</a></li>
-    <li><a href="#"><i class="fas fa-address-card"></i>About</a></li>
-    <li><a href="#"><i class="fas fa-project-diagram"></i>portfolio</a></li>
-    <li><a href="#"><i class="fas fa-blog"></i>Blogs</a></li>
-    <li><a href="#"><i class="fas fa-address-book"></i>Contact</a></li>
-    <li><a href="#"><i class="fas fa-map-pin"></i>Map</a></li>
-  </ul>
+
+  <div id="navbar">
+    <ul>
+      <li><a href="#"><i class="fas fa-home"></i>Dashboard</a></li>
+      <li><a href="#"><i class="fas fa-user"></i>Add New Services</a></li>
+      <li><a href="#"><i class="fa fa-sign-out mr-2"></i>Logout</a></li>
+    </ul>
+  </div>
+
+  <div><button class="button is-rounded m-6 is-primary" id="sidebarToggle" aria-label="menu" aria-expanded="false" data-target="navbar"><i class="fa fa-greater-than"></i></button></div>
 </div>
