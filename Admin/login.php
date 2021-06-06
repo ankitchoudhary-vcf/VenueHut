@@ -1,3 +1,43 @@
+<?php
+
+include('conn.php');
+
+if (isset($_POST['login'])) {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $user_id;
+
+    $sq = "SELECT * FROM `admin_users` WHERE `user_name`='" . $username . "'";
+    $result = mysqli_query($conn, $sq);
+    // echo $sq;
+    // echo $result;
+    $ctr = 0;
+    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+        if (password_verify($password, $row['Password'])) {
+            $ctr = 1;
+            $user_id  = $row['user_id'];
+        }
+    }
+
+    if ($ctr == 1) {
+        session_start();
+        $_SESSION['user_id'] = $user_id;
+        $_SESSION['success'] = "Successfully Logged In";
+    } else {
+?>
+        <article class="message is-warning">
+            <div class="message-header">
+                <p>Invalid Username or Password</p>
+                <button class="delete" aria-label="delete"></button>
+            </div>
+        </article>
+
+<?php
+    }
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +56,7 @@
             <div class="content">
                 <div class="content has-text-centered">
                     <figure class="image is-64x64" style="margin: auto auto;">
-                        <img src="./assets/img/avatars/logo.png" alt="...">
+                        <img src="./assets/image/favicon.png" alt="logo">
                     </figure>
                     <p class="title" style="margin: 5px;">Login</p>
                     <p>Use Your VenueHut Account</p>
@@ -54,5 +94,6 @@
     </div>
 
 </body>
+<script src="./assets/js/message.js"></script>
 
 </html>

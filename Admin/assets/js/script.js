@@ -1,3 +1,6 @@
+
+// Navbar controls
+
 var burger = document.getElementById("sidebarToggle");
 var nav = document.getElementById(burger.dataset.target);
 

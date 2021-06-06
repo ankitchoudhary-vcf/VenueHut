@@ -2,12 +2,13 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
+$database = "venuehut";
 
 // Create connection
-$conn= mysqli_connect($servername,$username,$password);
+$conn= mysqli_connect($servername,$username,$password, $database);
 // Check connection
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
-}
-echo "Connected Successfully.";
+// if (!$conn) {
+//   die("Connection failed: " . mysqli_connect_error());
+// }
+// echo "Connected Successfully.";
 ?>
