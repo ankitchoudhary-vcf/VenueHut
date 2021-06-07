@@ -291,13 +291,13 @@ if (isset($_POST['addVenue'])) {
                             </div>
                             <div class="field">
                                 <label class="label" for="description">venue Description :</label>
-                                <p class="control has-icons-left">
+                                <p class="control">
                                     <textarea class="textarea" name="description" id="description" placeholder="Enter the Description of the Venue" required></textarea>
                                 </p>
                             </div>
                             <div class="field">
                                 <label class="label" for="description">venue Price :</label>
-                                <p class="control has-icons-left">
+                                <p class="control">
                                 <input class="input" type="text" id="price" name="price" placeholder="Enter the Venue Price" required>
                                 </p>
                             </div>
