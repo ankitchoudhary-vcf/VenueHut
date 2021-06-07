@@ -22,6 +22,45 @@ while ($row = mysqli_fetch_array($result)) {
     $image = $row['image'];
 }
 
+
+if(isset($_POST['EditProfile']))
+{
+
+}
+
+if(isset($_POST['EditImage']))
+{
+    $file = rand(1000, 100000) . "-" . $_FILES['Image']['name'];
+    $file_loc = $_FILES['Image']['tmp_name'];
+    $file_size = $_FILES['Image']['size'];
+    $file_type = $_FILES['Image']['type'];
+    $folder = "../upload/";
+
+    /* new file size in KB */
+    $new_size = $file_size / 1024;
+    /* new file size in KB */
+
+    /* make file name in lower case */
+    $new_file_name = strtolower($file);
+    /* make file name in lower case */
+
+    $final_file = str_replace(' ', '-', $new_file_name);
+
+    if (move_uploaded_file($file_loc, $folder . $final_file)) {
+        $sql = "UPDATE `admin_users` SET `image` = ' $final_file' WHERE `user_id` = '$userID'";
+        if(mysqli_query($conn, $sql)){
+            $_SESSION['upload_success'] = "Profile Image successfully";
+            $image = $final_file;
+        }
+        else{
+            $_SESSION['upload_error'] = "Error occurred while uploading, please try again";
+        }
+    } else {
+
+        $_SESSION['upload_error'] = "Error occurred while uploading, please try again";
+    }
+}
+
 ?>
 
 
@@ -51,6 +90,36 @@ while ($row = mysqli_fetch_array($result)) {
         <!-- main section -->
         <div class="main_content">
 
+            <?php
+                if (isset($_SESSION['upload_error'])) {
+                    ?>
+        
+                        <article class="message is-warning">
+                            <div class="message-header">
+                                <p><?php echo $_SESSION['upload_error']; ?></p>
+                                <button class="delete" aria-label="delete"></button>
+                            </div>
+                        </article>
+        
+                    <?php
+                        unset($_SESSION['upload_error']);
+                    }
+        
+                    if (isset($_SESSION['upload_success'])) {
+                    ?>
+        
+                        <article class="message is-success">
+                            <div class="message-header">
+                                <p><?php echo $_SESSION['upload_success']; ?></p>
+                                <button class="delete" aria-label="delete"></button>
+                            </div>
+                        </article>
+        
+                    <?php
+                        unset($_SESSION['upload_success']);
+                    }
+            ?>
+
             <div class=" container mx-4 mt-4">
                 <div class="title">
                     <nav class="breadcrumb" aria-label="breadcrumbs">
@@ -74,7 +143,7 @@ while ($row = mysqli_fetch_array($result)) {
                                 <?php
                                 } else {
                                 ?>
-                                    <img class="is-rounded" src="../upload/<?php echo $image; ?>" style="width:256px; height:256px;">
+                                    <img class="is-rounded" src="../upload/<?php echo trim($image); ?>" style="width:256px; height:256px;">
                                     <button class="button modal-button is-outlined is-primary m-2" data-target="EditImage"><i class="fa fa-edit mr-2"></i>Edit Image</button>
                                 <?php
                                 }
