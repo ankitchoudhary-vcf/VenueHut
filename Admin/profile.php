@@ -23,13 +23,22 @@ while ($row = mysqli_fetch_array($result)) {
 }
 
 
-if(isset($_POST['EditProfile']))
-{
+if (isset($_POST['EditProfile'])) {
+    $name = $_POST['username'];
+    $address = $_POST['address'];
 
+    $uq = "UPDATE `admin_users` SET `user_name` = '$name' , `address` = '$address' WHERE `user_id` = '$userID'";
+
+    if (mysqli_query($conn, $uq)) {
+        $_SESSION['update_success'] = "Profile Update Successfully";
+        $username = $name;
+    } else {
+        $_SESSION['update_error'] = "Error occurred, please try again";
+
+    }
 }
 
-if(isset($_POST['EditImage']))
-{
+if (isset($_POST['EditImage'])) {
     $file = rand(1000, 100000) . "-" . $_FILES['Image']['name'];
     $file_loc = $_FILES['Image']['tmp_name'];
     $file_size = $_FILES['Image']['size'];
@@ -48,11 +57,10 @@ if(isset($_POST['EditImage']))
 
     if (move_uploaded_file($file_loc, $folder . $final_file)) {
         $sql = "UPDATE `admin_users` SET `image` = ' $final_file' WHERE `user_id` = '$userID'";
-        if(mysqli_query($conn, $sql)){
+        if (mysqli_query($conn, $sql)) {
             $_SESSION['upload_success'] = "Profile Image successfully";
             $image = $final_file;
-        }
-        else{
+        } else {
             $_SESSION['upload_error'] = "Error occurred while uploading, please try again";
         }
     } else {
@@ -91,34 +99,66 @@ if(isset($_POST['EditImage']))
         <div class="main_content">
 
             <?php
-                if (isset($_SESSION['upload_error'])) {
-                    ?>
-        
-                        <article class="message is-warning">
-                            <div class="message-header">
-                                <p><?php echo $_SESSION['upload_error']; ?></p>
-                                <button class="delete" aria-label="delete"></button>
-                            </div>
-                        </article>
-        
-                    <?php
-                        unset($_SESSION['upload_error']);
-                    }
-        
-                    if (isset($_SESSION['upload_success'])) {
-                    ?>
-        
-                        <article class="message is-success">
-                            <div class="message-header">
-                                <p><?php echo $_SESSION['upload_success']; ?></p>
-                                <button class="delete" aria-label="delete"></button>
-                            </div>
-                        </article>
-        
-                    <?php
-                        unset($_SESSION['upload_success']);
-                    }
+            if (isset($_SESSION['upload_error'])) {
             ?>
+
+                <article class="message is-warning">
+                    <div class="message-header">
+                        <p><?php echo $_SESSION['upload_error']; ?></p>
+                        <button class="delete" aria-label="delete"></button>
+                    </div>
+                </article>
+
+            <?php
+                unset($_SESSION['upload_error']);
+            }
+
+            if (isset($_SESSION['upload_success'])) {
+            ?>
+
+                <article class="message is-success">
+                    <div class="message-header">
+                        <p><?php echo $_SESSION['upload_success']; ?></p>
+                        <button class="delete" aria-label="delete"></button>
+                    </div>
+                </article>
+
+            <?php
+                unset($_SESSION['upload_success']);
+            }
+            ?>
+            
+            <?php
+            if (isset($_SESSION['update_error'])) {
+            ?>
+
+                <article class="message is-warning">
+                    <div class="message-header">
+                        <p><?php echo $_SESSION['update_error']; ?></p>
+                        <button class="delete" aria-label="delete"></button>
+                    </div>
+                </article>
+
+            <?php
+                unset($_SESSION['update_error']);
+            }
+
+            if (isset($_SESSION['update_success'])) {
+            ?>
+
+                <article class="message is-success">
+                    <div class="message-header">
+                        <p><?php echo $_SESSION['update_success']; ?></p>
+                        <button class="delete" aria-label="delete"></button>
+                    </div>
+                </article>
+
+            <?php
+                unset($_SESSION['update_success']);
+            }
+            ?>
+            
+
 
             <div class=" container mx-4 mt-4">
                 <div class="title">
@@ -173,7 +213,7 @@ if(isset($_POST['EditImage']))
                     </div>
                 </div>
             </div>
-            
+
 
 
             <!-- Edit Image Section -->
@@ -251,9 +291,9 @@ if(isset($_POST['EditImage']))
 
             <!-- footer section -->
             <div style="margin-top:124px;">
-            <?php
-            include('footer.php');
-            ?>
+                <?php
+                include('footer.php');
+                ?>
             </div>
             <!-- End footer section -->
 
