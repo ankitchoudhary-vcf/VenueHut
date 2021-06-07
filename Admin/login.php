@@ -55,7 +55,7 @@ if (isset($_POST['login'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VenueHut</title>
-    <link rel="shortcut icon" type="image/jpg" href="./assets/image/favicon.png"/>
+    <link rel="shortcut icon" type="image/jpg" href="../assets/image/favicon.png"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 </head>
@@ -66,7 +66,7 @@ if (isset($_POST['login'])) {
             <div class="content">
                 <div class="content has-text-centered">
                     <figure class="image is-64x64" style="margin: auto auto;">
-                        <img src="./assets/image/favicon.png" alt="logo">
+                        <img src="../assets/image/favicon.png" alt="logo">
                     </figure>
                     <p class="title" style="margin: 5px;">Login</p>
                     <p>Use Your VenueHut Account</p>
@@ -104,6 +104,6 @@ if (isset($_POST['login'])) {
     </div>
 
 </body>
-<script src="./assets/js/message.js"></script>
+<script src="../assets/js/message.js"></script>
 
 </html>

@@ -1,5 +1,5 @@
 <div class="sidebar">
-  <h2><img src="./assets/image/favicon.png"> VenueHut</h2>
+  <h2><img src="../assets/image/favicon.png"> VenueHut</h2>
 
   <div id="navbar">
     <ul>
