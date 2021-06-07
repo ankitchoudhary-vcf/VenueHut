@@ -12,12 +12,30 @@ if (isset($_POST['addService'])) {
     $ServiceName = $_POST['ServiceName'];
     $Description = $_POST['Description'];
 
-    $aq = "INSERT INTO `services` (`service_name`, `service_description`) VALUES ('$ServiceName', '$Description')";
+    $file = rand(1000, 100000) . "-" . $_FILES['servicesImage']['name'];
+    $file_loc = $_FILES['servicesImage']['tmp_name'];
+    $file_size = $_FILES['servicesImage']['size'];
+    $file_type = $_FILES['servicesImage']['type'];
+    $folder = "../upload/";
 
-    if (mysqli_query($conn, $aq)) {
-        $_SESSION['addService_success'] = " Services Added Successfully";
+    $new_file_name = strtolower($file);
+
+    $final_file = str_replace(' ', '-', $new_file_name);
+
+
+
+
+
+    if (move_uploaded_file($file_loc, $folder . $final_file)) {
+        $aq = "INSERT INTO `services` (`service_name`, `service_description`, `service_Image`) VALUES ('$ServiceName', '$Description', '$final_file')";
+        if (mysqli_query($conn, $aq)) {
+            $_SESSION['addService_success'] = " Services Added Successfully";
+        } else {
+            $_SESSION['addService_error'] = " Error occurs, Try again";
+        }
     } else {
-        $_SESSION['addService_error'] = " Error occurs, Try again";
+
+        $_SESSION['addService_error'] = "Error occurred while uploading, please try again";
     }
 }
 
@@ -41,10 +59,9 @@ if (isset($_POST['addVenue'])) {
 
     if (move_uploaded_file($file_loc, $folder . $final_file)) {
         $sql = "INSERT INTO `venues` (`user_id`, `service_Id`, `venue_name`, `venue_location`, `venue_description`, `venue_image`, `venue_price`) VALUES('$userId', '$serviceId', '$venueName', '$VenueLocation', '$VenueDescription', '$final_file', '$price')";
-        if(mysqli_query($conn, $sql)){
+        if (mysqli_query($conn, $sql)) {
             $_SESSION['venue_success'] = "Venue Added successfully";
-        }
-        else{
+        } else {
             $_SESSION['venue_error'] = "Error occurred, please try again";
         }
     } else {
@@ -124,44 +141,44 @@ if (isset($_POST['addVenue'])) {
             }
 
             if (isset($_SESSION['venue_success'])) {
-                ?>
-    
-                    <article class="message is-success">
-                        <div class="message-header">
-                            <p><?php echo $_SESSION['venue_success']; ?></p>
-                            <button class="delete" aria-label="delete"></button>
-                        </div>
-                    </article>
-    
-                <?php
-                    unset($_SESSION['venue_success']);
-                }
-                if (isset($_SESSION['upload_error'])) {
-                ?>
-    
-                    <article class="message is-warning">
-                        <div class="message-header">
-                            <p><?php echo $_SESSION['upload_error']; ?></p>
-                            <button class="delete" aria-label="delete"></button>
-                        </div>
-                    </article>
-    
-                <?php
-                    unset($_SESSION['upload_error']);
-                }
-                if (isset($_SESSION['venue_error'])) {
-                    ?>
-        
-                        <article class="message is-warning">
-                            <div class="message-header">
-                                <p><?php echo $_SESSION['venue_error']; ?></p>
-                                <button class="delete" aria-label="delete"></button>
-                            </div>
-                        </article>
-        
-                    <?php
-                        unset($_SESSION['venue_error']);
-                    }
+            ?>
+
+                <article class="message is-success">
+                    <div class="message-header">
+                        <p><?php echo $_SESSION['venue_success']; ?></p>
+                        <button class="delete" aria-label="delete"></button>
+                    </div>
+                </article>
+
+            <?php
+                unset($_SESSION['venue_success']);
+            }
+            if (isset($_SESSION['upload_error'])) {
+            ?>
+
+                <article class="message is-warning">
+                    <div class="message-header">
+                        <p><?php echo $_SESSION['upload_error']; ?></p>
+                        <button class="delete" aria-label="delete"></button>
+                    </div>
+                </article>
+
+            <?php
+                unset($_SESSION['upload_error']);
+            }
+            if (isset($_SESSION['venue_error'])) {
+            ?>
+
+                <article class="message is-warning">
+                    <div class="message-header">
+                        <p><?php echo $_SESSION['venue_error']; ?></p>
+                        <button class="delete" aria-label="delete"></button>
+                    </div>
+                </article>
+
+            <?php
+                unset($_SESSION['venue_error']);
+            }
 
             ?>
 
@@ -198,9 +215,20 @@ if (isset($_POST['addVenue'])) {
                                     </p>
                                 </header>
                                 <div class="card-content">
-                                    <div class="content">
-                                        <?php echo $row['service_description']; ?>
-                                    </div>
+                                    <article class="media" style="height:100%;">
+                                        <figure class="media-left">
+                                            <p class="image is-128x128 is-square">
+                                                <img src="../upload/<?php echo trim($row['service_Image']); ?>">
+                                            </p>
+                                        </figure>
+                                        <div class="media-content">
+                                            <div class="content">
+                                                <p>
+                                                    <?php echo $row['service_description']; ?>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </article>
                                 </div>
                                 <footer class="card-footer">
                                     <a class="card-footer-item modal-button" data-target="addVenue" data-id="<?php echo $row['service_Id']; ?>">Add New Venue</a>
@@ -241,6 +269,12 @@ if (isset($_POST['addVenue'])) {
                                 <label class="label" for="description">Service Description :</label>
                                 <p class="control has-icons-left">
                                     <textarea class="textarea" name="Description" id="description" placeholder="Enter the Description of the Service" required></textarea>
+                                </p>
+                            </div>
+                            <div class="field">
+                                <label class="label" for="image">venue Image :</label>
+                                <p class="control has-icons-left">
+                                    <input type="file" accept=".gif, .png, .jpg, .jpeg, .webp" name="servicesImage" id="Image" required>
                                 </p>
                             </div>
                             <div class="field has-text-centered">
@@ -298,13 +332,13 @@ if (isset($_POST['addVenue'])) {
                             <div class="field">
                                 <label class="label" for="description">venue Price :</label>
                                 <p class="control">
-                                <input class="input" type="text" id="price" name="price" placeholder="Enter the Venue Price" required>
+                                    <input class="input" type="text" id="price" name="price" placeholder="Enter the Venue Price" required>
                                 </p>
                             </div>
                             <div class="field">
                                 <label class="label" for="image">venue Image :</label>
                                 <p class="control has-icons-left">
-                                    <input type="file" accept=".gif, .png, .jpg, .jpeg" name="venueImage" id="image" required>
+                                    <input type="file" accept=".gif, .png, .jpg, .jpeg, .webp" name="venueImage" id="image" required>
                                 </p>
                             </div>
                             <div class="field has-text-centered">
@@ -326,10 +360,10 @@ if (isset($_POST['addVenue'])) {
 
 
             <!-- footer section -->
-            <div style="margin-top:202px;">
-            <?php
-            include('footer.php');
-            ?>
+            <div>
+                <?php
+                include('footer.php');
+                ?>
             </div>
             <!-- End footer section -->
 

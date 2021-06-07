@@ -85,6 +85,7 @@ if (isset($_GET['id'])) {
                                                     <strong><button class="button is-primary">Rs. <?php echo $row['venue_price']; ?> /-</button></strong>
                                                 </p>
                                             </div>
+                                        </div>
                                     </article>
                                 </div>
                             </div>
@@ -103,7 +104,7 @@ if (isset($_GET['id'])) {
             </div>
 
             <!-- footer section -->
-            <div style="margin-top:270px;">
+            <div>
                 <?php
                 include('footer.php');
                 ?>

@@ -60,9 +60,20 @@ include('conn.php');
                                     </p>
                                 </header>
                                 <div class="card-content">
-                                    <div class="content">
-                                        <?php echo $row['service_description']; ?>
-                                    </div>
+                                <article class="media" style="height:100%;">
+                                        <figure class="media-left">
+                                            <p class="image is-128x128 is-square">
+                                                <img src="../upload/<?php echo trim($row['service_Image']); ?>">
+                                            </p>
+                                        </figure>
+                                        <div class="media-content">
+                                            <div class="content">
+                                                <p>
+                                                    <?php echo $row['service_description']; ?>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </article>
                                 </div>
                                 <footer class="card-footer">
                                     <a class="card-footer-item" href="./venue.php?id=<?php echo $row['service_Id']; ?>">View venue</a>
@@ -83,7 +94,7 @@ include('conn.php');
             </div>
 
             <!-- footer section -->
-            <div style="margin-top:270px;">
+            <div>
             <?php
             include('footer.php');
             ?>
