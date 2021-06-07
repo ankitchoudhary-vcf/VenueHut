@@ -26,6 +26,7 @@ if (isset($_POST['addVenue'])) {
     $VenueLocation = $_POST['venueLocation'];
     $VenueDescription = $_POST['description'];
     $serviceId = $_POST['Id'];
+    $price = $_POST['price'];
     $userId = $_SESSION['user_id'];
 
     $file = rand(1000, 100000) . "-" . $_FILES['venueImage']['name'];
@@ -34,18 +35,12 @@ if (isset($_POST['addVenue'])) {
     $file_type = $_FILES['venueImage']['type'];
     $folder = "../upload/";
 
-    /* new file size in KB */
-    $new_size = $file_size / 1024;
-    /* new file size in KB */
-
-    /* make file name in lower case */
     $new_file_name = strtolower($file);
-    /* make file name in lower case */
 
     $final_file = str_replace(' ', '-', $new_file_name);
 
     if (move_uploaded_file($file_loc, $folder . $final_file)) {
-        $sql = "INSERT INTO `venues` (`user_id`, `service_Id`, `venue_name`, `venue_location`, `venue_description`, `venue_image`) VALUES('$userId', '$serviceId', '$venueName', '$VenueLocation', '$VenueDescription', '$final_file')";
+        $sql = "INSERT INTO `venues` (`user_id`, `service_Id`, `venue_name`, `venue_location`, `venue_description`, `venue_image`, `venue_price`) VALUES('$userId', '$serviceId', '$venueName', '$VenueLocation', '$VenueDescription', '$final_file', '$price')";
         if(mysqli_query($conn, $sql)){
             $_SESSION['venue_success'] = "Venue Added successfully";
         }
@@ -298,6 +293,12 @@ if (isset($_POST['addVenue'])) {
                                 <label class="label" for="description">venue Description :</label>
                                 <p class="control has-icons-left">
                                     <textarea class="textarea" name="description" id="description" placeholder="Enter the Description of the Venue" required></textarea>
+                                </p>
+                            </div>
+                            <div class="field">
+                                <label class="label" for="description">venue Price :</label>
+                                <p class="control has-icons-left">
+                                <input class="input" type="text" id="price" name="price" placeholder="Enter the Venue Price" required>
                                 </p>
                             </div>
                             <div class="field">
