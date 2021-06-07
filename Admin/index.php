@@ -173,7 +173,6 @@ if (isset($_POST['addVenue'])) {
 
 
             <div class=" container mx-4 mt-4">
-                <a class="button modal-button" data-target="addServices" style="float:right"><i class="fa fa-plus mr-2" style="color:#00d1b2;"></i> Add New Services</a>
                 <div class="title">
                     <nav class="breadcrumb" aria-label="breadcrumbs">
                         <ul>
@@ -182,6 +181,8 @@ if (isset($_POST['addVenue'])) {
                         </ul>
                     </nav>
                 </div>
+                <a class="button modal-button float-right" data-target="addServices"><i class="fa fa-plus mr-2" style="color:#00d1b2;"></i> Add New Services</a>
+                <br>
 
                 <div class="columns is-multiline m-4">
 

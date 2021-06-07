@@ -69,21 +69,24 @@ while ($row = mysqli_fetch_array($result)) {
                                 if (!($image)) {
                                 ?>
                                     <img class="is-rounded" src="https://bulma.io/images/placeholders/256x256.png">
+                                    <button class="button modal-button is-outlined is-primary m-2" data-target="EditImage"><i class="fa fa-edit mr-2"></i>Edit Image</button>
 
                                 <?php
-                                }
-                                else{
-                                    ?>
-                                    <img class="is-rounded" src="../upload/<?php echo $image;?>">
-                                    <?php
+                                } else {
+                                ?>
+                                    <img class="is-rounded" src="../upload/<?php echo $image; ?>">
+                                    <button class="button modal-button is-outlined is-primary m-2" data-target="EditImage"><i class="fa fa-edit mr-2"></i>Edit Image</button>
+                                <?php
                                 }
 
                                 ?>
                             </figure>
+
                         </div>
                     </div>
 
-                    <div class="column is-half is desktop">
+                    <div class="column is-half is desktop box">
+
                         <div class="title">
                             Username : <span class="title is-4">
                                 <?php echo $username; ?>
@@ -94,9 +97,87 @@ while ($row = mysqli_fetch_array($result)) {
                                 <?php echo $address; ?>
                             </span>
                         </div>
+                        <div>
+                            <button class="button is-outlined is-primary modal-button float-right" data-target="EditProfile"><i class="fa fa-edit mx-2"></i>Edit Profile</button>
+                        </div>
+
                     </div>
                 </div>
             </div>
+
+
+            <!-- Edit Image Section -->
+
+            <div class="modal" id="EditImage">
+                <div class="modal-background"></div>
+                <div class="modal-card">
+                    <header class="modal-card-head">
+                        <p class="modal-card-title">Edit your Profile Image </p>
+                        <button class="delete close" aria-label="close"></button>
+                    </header>
+                    <section class="modal-card-body">
+                        <div class="title">Select your Profile Image</div>
+                        <form method="post" enctype="multipart/form-data">
+                            <div class="field">
+                                <p class="control">
+                                    <input type="file" name="Image" accept=".png, .jpg, .gif, .jpeg" required>
+                                </p>
+                            </div>
+                            <div class="field has-text-centered">
+                                <p class="control">
+                                    <button type="submit" class="button is-rounded is-fullwidth is-6 has-text-white is-primary" name="EditImage">
+                                        Update Image
+                                    </button>
+                                </p>
+                            </div>
+                        </form>
+                    </section>
+                    <footer class="modal-card-foot">
+                    </footer>
+                </div>
+            </div>
+
+            <!-- End Edit Image Section -->
+
+
+            <!-- Edit Profile Section -->
+
+            <div class="modal" id="EditProfile">
+                <div class="modal-background"></div>
+                <div class="modal-card">
+                    <header class="modal-card-head">
+                        <p class="modal-card-title">Edit your Profile </p>
+                        <button class="delete close" aria-label="close"></button>
+                    </header>
+                    <section class="modal-card-body">
+                        <form method="post" enctype="multipart/form-data">
+                            <div class="field">
+                                <label for="username" class="label">Username</label>
+                                <p class="control">
+                                    <input class="input" id="username" type="input" name="username" value="<?php echo $username; ?>" required>
+                                </p>
+                            </div>
+                            <div class="field">
+                                <label for="address" class="label">Address</label>
+                                <p class="control">
+                                    <textarea id="address" class="textarea" name="address"><?php echo $address; ?></textarea>
+                                </p>
+                            </div>
+                            <div class="field has-text-centered">
+                                <p class="control">
+                                    <button type="submit" class="button is-rounded is-fullwidth is-6 has-text-white is-primary" name="EditProfile">
+                                        Update
+                                    </button>
+                                </p>
+                            </div>
+                        </form>
+                    </section>
+                    <footer class="modal-card-foot">
+                    </footer>
+                </div>
+            </div>
+
+            <!-- End Edit Profile Section -->
 
             <!-- footer section -->
             <?php

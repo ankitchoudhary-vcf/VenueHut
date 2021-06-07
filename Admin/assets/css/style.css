@@ -111,6 +111,9 @@ body{
 .wrapper .main_content .info div{
   margin-bottom: 20px;
 }
+.float-right{
+  float: right;
+}
 
 @media (max-height: 500px){
   .social_media{
@@ -120,6 +123,7 @@ body{
 @media (max-width:500px){
   .wrapper .sidebar{
     width:100px;
+    z-index: 1;
   }
   .wrapper .sidebar #navbar{
     display: none;
@@ -130,5 +134,8 @@ body{
   #sidebarToggle{
     transform: translate(-50%, 100%);
     display: block;
+  }
+  .float-right{
+    float: none;
   }
 }
