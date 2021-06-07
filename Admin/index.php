@@ -325,9 +325,11 @@ if (isset($_POST['addVenue'])) {
 
 
             <!-- footer section -->
+            <div style="margin-top:202px;">
             <?php
             include('footer.php');
             ?>
+            </div>
             <!-- End footer section -->
 
         </div>

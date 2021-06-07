@@ -68,13 +68,13 @@ while ($row = mysqli_fetch_array($result)) {
                                 <?php
                                 if (!($image)) {
                                 ?>
-                                    <img class="is-rounded" src="https://bulma.io/images/placeholders/256x256.png">
+                                    <img class="is-rounded" src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=889&q=80" style="width:256px; height:256px;">
                                     <button class="button modal-button is-outlined is-primary m-2" data-target="EditImage"><i class="fa fa-edit mr-2"></i>Edit Image</button>
 
                                 <?php
                                 } else {
                                 ?>
-                                    <img class="is-rounded" src="../upload/<?php echo $image; ?>">
+                                    <img class="is-rounded" src="../upload/<?php echo $image; ?>" style="width:256px; height:256px;">
                                     <button class="button modal-button is-outlined is-primary m-2" data-target="EditImage"><i class="fa fa-edit mr-2"></i>Edit Image</button>
                                 <?php
                                 }
@@ -104,6 +104,7 @@ while ($row = mysqli_fetch_array($result)) {
                     </div>
                 </div>
             </div>
+            
 
 
             <!-- Edit Image Section -->
@@ -180,9 +181,11 @@ while ($row = mysqli_fetch_array($result)) {
             <!-- End Edit Profile Section -->
 
             <!-- footer section -->
+            <div style="margin-top:124px;">
             <?php
             include('footer.php');
             ?>
+            </div>
             <!-- End footer section -->
 
         </div>
