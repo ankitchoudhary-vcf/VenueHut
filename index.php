@@ -52,7 +52,7 @@ include('conn.php');
                     ?>
 
                         <!-- Services Section -->
-                        <div class="column is-half is-desktop">
+                        <div class="column is-full is-desktop">
                             <div class="card">
                                 <header class="card-header">
                                     <p class="card-header-title">
@@ -60,20 +60,20 @@ include('conn.php');
                                     </p>
                                 </header>
                                 <div class="card-content">
-                                <article class="media" style="height:100%;">
-                                        <figure class="media-left">
-                                            <p class="image is-128x128 is-square">
-                                                <img src="../upload/<?php echo trim($row['service_Image']); ?>">
-                                            </p>
-                                        </figure>
-                                        <div class="media-content">
+                                    <div class="columns">
+                                        <div class="column is-one-third is-desktop">
+                                            <figure class="image is-256x256 is-square">
+                                                <img class="has-ratio" src="../upload/<?php echo trim($row['service_Image']); ?>">
+                                            </figure>
+                                        </div>
+                                        <div class="column">
                                             <div class="content">
                                                 <p>
                                                     <?php echo $row['service_description']; ?>
                                                 </p>
                                             </div>
                                         </div>
-                                    </article>
+                                    </div>
                                 </div>
                                 <footer class="card-footer">
                                     <a class="card-footer-item" href="./venue.php?id=<?php echo $row['service_Id']; ?>">View venue</a>
@@ -95,9 +95,9 @@ include('conn.php');
 
             <!-- footer section -->
             <div>
-            <?php
-            include('footer.php');
-            ?>
+                <?php
+                include('footer.php');
+                ?>
             </div>
             <!-- End footer section -->
 

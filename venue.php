@@ -67,26 +67,29 @@ if (isset($_GET['id'])) {
                         <div class="column is-full is-desktop">
                             <div class="card">
                                 <div class="card-content">
-                                    <article class="media">
-                                        <figure class="media-left">
-                                            <p class="image is-128x128">
-                                                <img src="../upload/<?php echo trim($row['venue_image']); ?>">
-                                            </p>
-                                        </figure>
-                                        <div class="media-content">
+                                <div class="columns">
+                                        <div class="column is-one-third is-desktop">
+                                            <figure class="image is-256x256 is-square">
+                                                <img class="has-ratio" src="../upload/<?php echo trim($row['venue_image']); ?>">
+                                            </figure>
+                                        </div>
+                                        <div class="column">
+                                            <div class="content">
                                             <div class="content">
                                                 <p>
                                                     <strong><?php echo $row['venue_name']; ?></strong>
                                                     <br>
                                                     <?php echo $row['venue_description']; ?>
                                                     <br>
+                                                    <br>
                                                     <small><i class="fas fa-map-marker-alt"></i> <?php echo $row['venue_location']; ?></small>
                                                     <br>
-                                                    <strong><button class="button is-primary">Rs. <?php echo $row['venue_price']; ?> /-</button></strong>
+                                                    <strong><a href="contact.php" class="button is-primary mt-6">Rs. <?php echo $row['venue_price']; ?> /-</a></strong>
                                                 </p>
                                             </div>
+                                            </div>
                                         </div>
-                                    </article>
+                                    </div>
                                 </div>
                             </div>
                         </div>
