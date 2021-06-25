@@ -131,6 +131,7 @@ if (isset($_GET['id'])) {
                                     <div class="product-content">
                                         <div class="title">
                                             <h2><?php echo $row['venue_name']; ?></h2>
+                                            <input type="hidden" value="<?php echo $row['venue_name'] ?>" id="venue_name" name="venue_name">
                                             <br>
                                             <small class="text-muted"><i class="fas fa-map-marker-alt"></i> <?php echo $row['venue_location']; ?></small>
 
@@ -140,7 +141,7 @@ if (isset($_GET['id'])) {
                                         </div>
                                         <div class="action">
                                             <a class="btn" id="share"><i class="fa fa-share"></i>Share</a>
-                                            <a class="btn" href="./order.php?id=<?php echo $id ?>&url=<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>" target="_blank"><i class=" fa fa-shopping-bag"></i>Book Now</a>
+                                            <button type="button" class="btn" style="background: #0042F5; color: #ffffff; border: none;" data-toggle="modal" data-target="#BookModal"> Book Now </button>
                                         </div>
                                         <div id="shareCard" style="display:none; margin-top:10px;">
                                             <input type="text" style="border:none;" value="<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>" id="share-url" readonly ">
@@ -226,6 +227,28 @@ if (isset($_GET['id'])) {
     include('./footer.php');
     ?>
     <!-- Footer  End -->
+
+    <!-- Book Now Modal Start -->
+    <div class="modal fade" id="BookModal" tabindex="-1" role="dialog" aria-labelledby="BookModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Book Venue Now</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Modal body text goes here.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" style="background: #0042F5; color: #ffffff; border: none;" class="btn btn-primary">Pay Now</button>
+                    <button type="button" style="background: #808080; color: #ffffff; border: none;" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Book Now Modal End -->
 
     <!-- Back to Top -->
     <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
