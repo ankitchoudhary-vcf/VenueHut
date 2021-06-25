@@ -66,6 +66,7 @@ include("conn.php");
                         ?>
                          <div class="login">
                             <a class="btn" style="margin: -14% 0 0 0;" href="./login.php">Login</a>
+                            <a class="btn" style="margin: -14% 0 0 0;" href="./Registration.php">Sign Up</a>
                         </div>
                         <?php
                     }
