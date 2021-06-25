@@ -49,6 +49,28 @@ include("conn.php");
                         </div>
                     </form>
                 </div>
+                <div class="col-md-3">
+                    <?php
+
+                    session_start();
+
+                    if (isset($_SESSION['user'])) {
+                    ?>
+                        <div class="logout">
+                            <a class="btn" href="./logout.php">Logout</a>
+                        </div>
+
+                    <?php
+                    }
+                    else {
+                        ?>
+                         <div class="login">
+                            <a class="btn" style="margin: -14% 0 0 0;" href="./login.php">Login</a>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                </div>
             </div>
         </div>
     </div>
