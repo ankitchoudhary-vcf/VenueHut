@@ -65,6 +65,23 @@ if (isset($_GET['id'])) {
                         <a href="./contact.php" class="nav-item nav-link">Contact Us</a>
                     </div>
                 </div>
+                <div class="navbar-nav-end">
+                        <?php
+
+                        session_start();
+
+                        if (isset($_SESSION['user'])) {
+                        ?>
+                            <a class="nav-item nav-link" href="./logout.php">Logout</a>
+                        <?php
+                        } else {
+                        ?>
+                            <a class="nav-item nav-link" href="./login.php">Login</a>
+                        <?php
+                        }
+                        ?>
+
+                    </div>
             </nav>
         </div>
     </div>
@@ -144,7 +161,7 @@ if (isset($_GET['id'])) {
                                         </div>
                                         <div class="action">
                                             <a class="btn" id="share"><i class="fa fa-share"></i>Share</a>
-                                            <button type="button" class="btn" style="background: #0042F5; color: #ffffff; border: none;" data-toggle="modal" data-target="#BookModal"> Book Now </button>
+                                            <button type="button" class="btn" style="background: #0042F5; color: #ffffff; border: none;" data-toggle="modal" data-target="#BookModal" onclick="check()"> Book Now </button>
                                         </div>
                                         <div id="shareCard" style="display:none; margin-top:10px;">
                                             <input type="text" style="border:none;" value="<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>" id="share-url" readonly ">
@@ -325,6 +342,13 @@ if (isset($_GET['id'])) {
             e.preventDefault();
 
         });
+
+        function check() {
+            var user = sessionStorage.getItem("user");
+            if(user == null){
+                window.location.assign('./login.php')
+            }
+        }
     </script>
 </body>
 
