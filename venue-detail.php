@@ -41,6 +41,9 @@ if (isset($_GET['id'])) {
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
 </head>
 
 <body>
@@ -171,6 +174,7 @@ if (isset($_GET['id'])) {
                                         <small><i class="fas fa-map-marker-alt"></i> <?php echo $row['venue_location']; ?></small>
                                         <br>
                                         <strong><a class="button is-primary mt-6">Rs. <?php echo $row['venue_price']; ?> /-</a></strong>
+                                        <input type="hidden" id="price" name="price" value="<?php echo $row['venue_price'] ?>">
                                     </div>
                                 </div>
                             </div>
@@ -238,13 +242,26 @@ if (isset($_GET['id'])) {
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <p>Modal body text goes here.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" style="background: #0042F5; color: #ffffff; border: none;" class="btn btn-primary">Pay Now</button>
-                    <button type="button" style="background: #808080; color: #ffffff; border: none;" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                </div>
+                <form id="payform">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="number">Enter Number of Persons : </label>
+                            <input type="number" class="form-control" id="number" placeholder="Enter Number" value="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Data For Venue : </label>
+                            <input type="date" class="form-control" id="date" required>
+                        </div>
+                        <br>
+                        <p>
+                        <h2>Total Amount : </h2> <span id="amount">Rs. 400 /- </span></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" style="background: #0042F5; color: #ffffff; border: none;" class="btn btn-primary">Pay Now</button>
+                        <button type="button" style="background: #808080; color: #ffffff; border: none;" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>
@@ -277,6 +294,37 @@ if (isset($_GET['id'])) {
             document.execCommand('copy');
             console.log("copy");
         };
+        var number = document.getElementById("number");
+        var price = document.getElementById("price");
+        price = price.value.split(" ");
+        price = parseInt(price[0], 10);
+        var amount = document.getElementById("amount");
+        amount.innerHTML = "Rs. " + price * number.value + " /-";
+        number.onchange = function() {
+            amount.innerHTML = "Rs. " + price * number.value + " /-";
+        }
+        var pay = document.getElementById("payform");
+        pay.addEventListener("submit", function(e) {
+            var a = document.getElementById('venue_name'); 
+
+            var options = {
+                "key": "rzp_test_kDRMFVjPewVsOC", // Enter the Key ID generated from the Dashboard
+                "amount": price*number.value*100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "currency": "INR",
+                "name": a.value,
+                "description": "Test Transaction",
+                "image": "https://images.unsplash.com/photo-1553729459-efe14ef6055d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjZ8fHBheW1lbnR8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+                "handler": function(response) {
+                    alert(response.razorpay_payment_id);
+                    alert(response.razorpay_order_id);
+                    alert(response.razorpay_signature)
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.open();
+            e.preventDefault();
+
+        });
     </script>
 </body>
 
