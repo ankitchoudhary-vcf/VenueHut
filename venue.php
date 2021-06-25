@@ -56,7 +56,7 @@ if (isset($_GET['id'])) {
                         <a href="./index.php#services" class="nav-item nav-link">Services</a>
                         <a href="./contact.php" class="nav-item nav-link">Contact Us</a>
                     </div>
-                    <div class="navbar-nav-end">
+                    <div class="navbar-nav-end d-flex">
                         <?php
 
                         session_start();
@@ -68,6 +68,7 @@ if (isset($_GET['id'])) {
                         } else {
                         ?>
                             <a class="nav-item nav-link" href="./login.php">Login</a>
+                            <a class="nav-item nav-link" href="./Registration.php">Sign Up</a>
                         <?php
                         }
                         ?>
