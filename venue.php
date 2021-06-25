@@ -56,6 +56,23 @@ if (isset($_GET['id'])) {
                         <a href="./index.php#services" class="nav-item nav-link">Services</a>
                         <a href="./contact.php" class="nav-item nav-link">Contact Us</a>
                     </div>
+                    <div class="navbar-nav-end">
+                        <?php
+
+                        session_start();
+
+                        if (isset($_SESSION['user'])) {
+                        ?>
+                            <a class="nav-item nav-link" href="./logout.php">Logout</a>
+                        <?php
+                        } else {
+                        ?>
+                            <a class="nav-item nav-link" href="./login.php">Login</a>
+                        <?php
+                        }
+                        ?>
+
+                    </div>
                 </div>
             </nav>
         </div>
