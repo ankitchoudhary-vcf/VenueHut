@@ -99,14 +99,14 @@ include("conn.php");
                 <div class="col-md-6">
                     <div class="header-slider normal-slider">
                         <div class="header-slider-item">
-                            <img src="img/slider-2.png" alt="Slider Image" />
+                            <img src="img/f2.jpg"  style="width:600px; height:400px;" alt="Slider Image" />
                             <div class="header-slider-caption">
                                 <p>Welcome to venueHut</p>
                                 <a class="btn" href="tel:xxxxxxxxxx">Contact Now</a>
                             </div>
                         </div>
                         <div class="header-slider-item">
-                            <img src="img/slider-3.jpg" alt="Slider Image" />
+                            <img src="img/f8.jpg"  style="width:600px; height:400px;" alt="Slider Image" />
                             <div class="header-slider-caption">
                                 <p>We help you to plan your special day</p>
                                 <a class="btn" href="tel:xxxxxxxxxx">Contact Now</a>
@@ -117,13 +117,13 @@ include("conn.php");
                 <div class="col-md-3">
                     <div class="header-img">
                         <div class="img-item">
-                            <img src="img/category-1.jpg" />
+                            <img src="img/f10.jpg" style="width:208px; height:200px;" />
                             <a class="img-text" href="./category.php?category=Charger">
                                 <p>Birthday Venue</p>
                             </a>
                         </div>
                         <div class="img-item">
-                            <img src="img/category-2.jpg" />
+                            <img src="img/f5.jpg" style="width:208px; height:200px;" />
                             <a class="img-text" href="./category.php?category=Tempered%20Glass">
                                 <p>Weeding Venue</p>
                             </a>
