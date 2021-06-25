@@ -17,8 +17,6 @@ if (isset($_POST['login'])) {
 
     $sq = "SELECT * FROM `users` WHERE `user_name`='" . $username . "'";
     $result = mysqli_query($conn, $sq);
-    // echo $sq;
-    // echo $result;
     $ctr = 0;
     while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
         if (password_verify($password, $row['user_password'])) {
@@ -26,12 +24,16 @@ if (isset($_POST['login'])) {
             $user_id  = $row['user_id'];
         }
     }
+    // echo $user_id;
 
     if ($ctr == 1) {
         $_SESSION['user'] = $user_id;
         $_SESSION['success'] = "Successfully Logged In";
         
-        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        if (isset($_SERVER["HTTP_REFERER"])) {
+            header("Location: " . $_SERVER["HTTP_REFERER"]);
+        }
+        
     } else {
 ?>
         <article class="message is-warning">
@@ -55,7 +57,7 @@ if (isset($_POST['login'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VenueHut</title>
-    <link rel="shortcut icon" type="image/jpg" href="./assets/image/favicon.png"/>
+    <link rel="shortcut icon" type="image/jpg" href="./img/favicon.png"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 </head>
