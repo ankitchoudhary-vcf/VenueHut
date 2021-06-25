@@ -8,7 +8,7 @@ if (isset($_POST['register'])) {
 
     $password = password_hash($password, PASSWORD_DEFAULT);
 
-    $sq = "INSERT INTO `users` (`user_name`, `user_password`, `Address`) VALUES ('$username', '$password')";
+    $sq = "INSERT INTO `users` (`user_name`, `user_password`) VALUES ('$username', '$password')";
     if(mysqli_query($conn, $sq))
     {
         ?>
