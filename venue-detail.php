@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 include("conn.php");
 
 if (isset($_GET['id'])) {
@@ -15,6 +18,17 @@ if (isset($_GET['id'])) {
     $result = mysqli_query($conn, $sql);
     while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
         $service = $row['service_name'];
+    }
+}
+
+if(isset($_POST['book'])){
+    if(isset($_SESSION['user'])){
+        $venue_id = $_POST['venue_id'];
+        $venue_name = $_POST['venue_name'];
+        $user_id = $_SESSION['user'];
+
+        $bq = "INSERT INTO `bookvenue`(`user_id`, `venue_id`, `venue_name`, `payment_status`) VALUES($user_id, $venue_id, '$venue_name', 'Pending')";
+        mysqli_query($conn, $bq);
     }
 }
 
@@ -67,8 +81,6 @@ if (isset($_GET['id'])) {
                 </div>
                 <div class="navbar-nav-end d-flex">
                         <?php
-
-                        session_start();
 
                         if (isset($_SESSION['user'])) {
                         ?>
@@ -152,7 +164,6 @@ if (isset($_GET['id'])) {
                                     <div class="product-content">
                                         <div class="title">
                                             <h2><?php echo $row['venue_name']; ?></h2>
-                                            <input type="hidden" value="<?php echo $row['venue_name'] ?>" id="venue_name" name="venue_name">
                                             <br>
                                             <small class="text-muted"><i class="fas fa-map-marker-alt"></i> <?php echo $row['venue_location']; ?></small>
 
@@ -161,8 +172,12 @@ if (isset($_GET['id'])) {
                                             <p style="font-size:medium;">RS. <?php echo $row['venue_price']; ?>/-</p>
                                         </div>
                                         <div class="action">
-                                            <a class="btn" id="share"><i class="fa fa-share"></i>Share</a>
-                                            <button type="button" class="btn" style="background: #0042F5; color: #ffffff; border: none;" data-toggle="modal" data-target="#BookModal" <?php if(!isset($_SESSION['user'])) { echo 'onclick="check()"'; } ?>> Book Now </button>
+                                            <a class="btn mb-4" id="share"><i class="fa fa-share"></i>Share</a>
+                                            <form method="post">
+                                            <input type="hidden" value="<?php echo $row['venue_name'] ?>" id="venue_name" name="venue_name">
+                                            <input type="hidden" value="<?php echo $row['venue_id'] ?>" id="venue_id" name="venue_id">
+                                            <button name="book" class="btn" style="background: #0042F5; color: #ffffff; border: none;" data-toggle="modal" data-target="#BookModal" <?php if(!isset($_SESSION['user'])) { echo 'onclick="check()"'; echo 'type="button"'; } else{ echo 'type="submit"';} ?>> Book Now </button>
+                                            </form>
                                         </div>
                                         <div id="shareCard" style="display:none; margin-top:10px;">
                                             <input type="text" style="border:none;" value="<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>" id="share-url" readonly ">
@@ -260,7 +275,7 @@ if (isset($_GET['id'])) {
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form id="payform">
+                <form id="payform" method="post">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="number">Enter Number of Persons : </label>
