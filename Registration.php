@@ -36,9 +36,9 @@ if (isset($_POST['register'])) {
             $mail->Host       = "smtp.gmail.com";
             $mail->Port        = '465';
             $mail->AddAddress($email);
-            $mail->Username = 'aicephotoc@gmail.com';
-            $mail->Password = 'aicephotoc@123';
-            $mail->setFrom('aicephotoc@gmail.com', 'VenueHut');
+            $mail->Username = 'EMAIL-ID';
+            $mail->Password = 'PASSWORD';
+            $mail->setFrom('EMAIL-ID', 'VenueHut');
             $mail->Subject = 'Registration Verification for VenueHut Application';
             $mail->Body = $message;
             $mail->AltBody = $message;
