@@ -21,8 +21,8 @@ if (isset($_GET['id'])) {
     }
 }
 
-if(isset($_POST['book'])){
-    if(isset($_SESSION['user'])){
+if (isset($_POST['book'])) {
+    if (isset($_SESSION['user'])) {
         $venue_id = $_POST['venue_id'];
         $venue_name = $_POST['venue_name'];
         $user_id = $_SESSION['user'];
@@ -80,21 +80,21 @@ if(isset($_POST['book'])){
                     </div>
                 </div>
                 <div class="navbar-nav-end d-flex">
-                        <?php
+                    <?php
 
-                        if (isset($_SESSION['user'])) {
-                        ?>
-                            <a class="nav-item nav-link" href="./logout.php">Logout</a>
-                        <?php
-                        } else {
-                        ?>
-                            <a class="nav-item nav-link" href="./login.php">Login</a>
-                            <a class="nav-item nav-link" href="./Registration.php">Sign Up</a>
-                        <?php
-                        }
-                        ?>
+                    if (isset($_SESSION['user'])) {
+                    ?>
+                        <a class="nav-item nav-link" href="./logout.php">Logout</a>
+                    <?php
+                    } else {
+                    ?>
+                        <a class="nav-item nav-link" href="./login.php">Login</a>
+                        <a class="nav-item nav-link" href="./Registration.php">Sign Up</a>
+                    <?php
+                    }
+                    ?>
 
-                    </div>
+                </div>
             </nav>
         </div>
     </div>
@@ -174,9 +174,15 @@ if(isset($_POST['book'])){
                                         <div class="action">
                                             <a class="btn mb-4" id="share"><i class="fa fa-share"></i>Share</a>
                                             <form method="post">
-                                            <input type="hidden" value="<?php echo $row['venue_name'] ?>" id="venue_name" name="venue_name">
-                                            <input type="hidden" value="<?php echo $row['venue_id'] ?>" id="venue_id" name="venue_id">
-                                            <button name="book" class="btn" style="background: #0042F5; color: #ffffff; border: none;" data-toggle="modal" data-target="#BookModal" <?php if(!isset($_SESSION['user'])) { echo 'onclick="check()"'; echo 'type="button"'; } else{ echo 'type="submit"';} ?>> Book Now </button>
+                                                <input type="hidden" value="<?php echo $row['venue_name'] ?>" id="venue_name" name="venue_name">
+                                                <input type="hidden" value="<?php echo $row['venue_id'] ?>" id="venue_id" name="venue_id">
+                                                <button type="submit" name="book" id="booking" hidden></button>
+                                                <button name="book" id="booknow" class="btn" style="background: #0042F5; color: #ffffff; border: none;" data-toggle="modal" data-target="#BookModal" <?php if (!isset($_SESSION['user'])) {
+                                                                                                                                                                                                            echo 'onclick="check()"';
+                                                                                                                                                                                                            echo 'type="button"';
+                                                                                                                                                                                                        } else {
+                                                                                                                                                                                                            echo 'type="button"';
+                                                                                                                                                                                                        } ?>> Book Now </button>
                                             </form>
                                         </div>
                                         <div id="shareCard" style="display:none; margin-top:10px;">
@@ -338,11 +344,11 @@ if(isset($_POST['book'])){
         }
         var pay = document.getElementById("payform");
         pay.addEventListener("submit", function(e) {
-            var a = document.getElementById('venue_name'); 
+            var a = document.getElementById('venue_name');
 
             var options = {
                 "key": "rzp_test_kDRMFVjPewVsOC", // Enter the Key ID generated from the Dashboard
-                "amount": price*number.value*100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "amount": price * number.value * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
                 "currency": "INR",
                 "name": a.value,
                 "description": "Test Transaction",
@@ -361,10 +367,21 @@ if(isset($_POST['book'])){
 
         function check() {
             var user = sessionStorage.getItem("user");
-            if(user == null){
+            if (user == null) {
                 window.location.assign('./login.php')
             }
         }
+
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#BookModal").click(function() {
+                if($("#BookModal").css("display") == "block")
+                {
+                    $("#booking").click();
+                }
+            });
+        });
     </script>
 </body>
 
