@@ -21,16 +21,7 @@ if (isset($_GET['id'])) {
     }
 }
 
-if (isset($_POST['book'])) {
-    if (isset($_SESSION['user'])) {
-        $venue_id = $_POST['venue_id'];
-        $venue_name = $_POST['venue_name'];
-        $user_id = $_SESSION['user'];
 
-        $bq = "INSERT INTO `bookvenue`(`user_id`, `venue_id`, `venue_name`, `payment_status`) VALUES($user_id, $venue_id, '$venue_name', 'Pending')";
-        mysqli_query($conn, $bq);
-    }
-}
 
 ?>
 <!DOCTYPE html>
@@ -371,15 +362,23 @@ if (isset($_POST['book'])) {
                 window.location.assign('./login.php')
             }
         }
-
     </script>
     <script>
         $(document).ready(function() {
-            $("#BookModal").click(function() {
-                if($("#BookModal").css("display") == "block")
-                {
-                    $("#booking").click();
-                }
+            $("#booknow").on("click", function(e) {
+                e.preventDefault();
+                var venue_id = $('input#venue_id').val(),
+                    venue_name = $('input#venue_name').val(),
+                    formData = 'venue_id=' + venue_id + '&venue_name=' + venue_name;
+
+                $.ajax({
+                    type: 'post',
+                    url: './book.php',
+                    data: formData,
+                    success: function(results) {
+                        console.log("done");
+                    }
+                });
             });
         });
     </script>
